@@ -1,5 +1,12 @@
 :root {
-    /* add colors */
+    /* colors */
+    --dark-blue: #2C3E50;
+    --action-red: #E74C3C;
+    --background-white: #ECF0F1;
+    --task-blue: #3498DB;
+    --task-darker-blue: #2980B9;
+    --background-grey: #D9D9D9;
+    --font-black: #383838;
 
     --ff-primary: 'Sora', sans-serif;
     --ff-icons: material-icons;
@@ -22,7 +29,7 @@
     --l: 30px;
     --xl: 50px;
     --xxl: 65px;
-    --xxxl: 80px;
+    --xxxl: 85px;
 
     --size-xs: 80px;
 
