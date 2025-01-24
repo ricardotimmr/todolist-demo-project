@@ -5,17 +5,12 @@ body {
   font-size: var(--m);
   hyphens: auto;
   line-height: var(--lh-normal);
-  color: var(--color-white);
-  background: linear-gradient(
-    135deg,
-    var(--color-fade-blue),
-    var(--color-fade-purple)
-  );
+  color: var(--font-black);
+  background-color: var(--background-white);
 }
 
 main {
-  margin-left: var(--xxxl);
-  margin-right: var(--xxxl);
+  margin: var(--xxxl);;
 }
 
 header {

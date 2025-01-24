@@ -4,21 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>taskly.</title>
-    <link rel="stylesheet" href="combined.css">
+    <link rel="stylesheet" href="/src/styles/combined.css">
+    <link rel="stylesheet" href="/src/styles/index.css">
 </head>
 <body>
-    <header>
-
-        <div>
-            <p>taskly.</p>
-            <span>help</span>
-        </div>
-
-
-    </header>
     
     <main>
-        <button></button>
+
+        <section class="header">
+            <div class="logo-section">
+                <h1>taskly.</h1>
+                <span class="icon">question_mark</span>
+                <div class="help-bubble">
+                    <p>
+                        taskly. keeps task management simple and efficient. 
+                        Create a task and drag it through different stages – from Backlog to Ongoing to Done. 
+                        Stay organized with a clear visual workflow and track your progress effortlessly.
+                    </p>
+
+                </div>
+            </div>
+            <p>
+                Welcome to taskly. – a fast and intuitive task management tool designed to keep you organized. 
+                This project is part of enhancing my frontend development skills, focusing on clean design, 
+                smooth user experience, and continuous improvements. 
+                As I refine and expand taskly, your feedback is always welcome. Let’s get things done efficiently!
+            </p>
+        </section>
+
+        <button id="new-task-button">
+            <p>create a new task</p>
+            <span class="icon">add</span>
+        </button>
+
+        <section class="task-section">
+
+            <div class="task-window" id="window-backlog">
+
+                <div class="task-header" id="header-backlog">
+                    <h2>backlog</h2>
+                    <p class="task-count">0</p>
+                </div>
+
+                <hr />
+
+                <div class="task-card">
+                    <div class="task-card-header">
+                      <h3>Implement Drag & Drop</h3>
+                      <div class="task-card-actions">
+                        <span class="icon edit">edit</span>
+                        <span class="icon delete">delete</span>
+                      </div>
+                    </div>
+                    <div class="task-card-body">
+                      <p>Add functionality to move tasks between columns smoothly.</p>
+                      <span class="icon circle">circle</span>
+                    </div>
+                </div>                  
+
+            </div>
+
+            <div class="task-window" id="window-ongoing">
+
+                <div class="task-header" id="header-ongoing">
+                    <h2>ongoing</h2>
+                    <p class="task-count">0</p>
+                </div>
+
+                <hr />
+
+                <div class="task-card">
+                    <div class="task-card-header">
+                      <h3>Redesign Homepage</h3>
+                      <div class="task-card-actions">
+                        <span class="icon edit">edit</span>
+                        <span class="icon delete">delete</span>
+                      </div>
+                    </div>
+                    <div class="task-card-body">
+                      <p>Improve the layout and update the color scheme for a modern look.</p>
+                      <span class="icon circle">circle</span>
+                    </div>
+                </div>                  
+
+            </div>
+
+            <div class="task-window" id="window-done">
+
+                <div class="task-header" id="header-done">
+                    <h2>done</h2>
+                    <p class="task-count">0</p>
+                </div>
+
+                <hr />
+
+                <div class="task-card">
+                    <div class="task-card-header">
+                      <h3>Fix Navbar Bug</h3>
+                      <div class="task-card-actions">
+                        <span class="icon edit">edit</span>
+                        <span class="icon delete">delete</span>
+                      </div>
+                    </div>
+                    <div class="task-card-body">
+                      <p>Resolve the issue where the navigation bar overlaps on mobile screens.</p>
+                      <span class="icon circle">circle</span>
+                    </div>
+                </div>
+                  
+
+            </div>
+
+        </section>
         
         
     </main>

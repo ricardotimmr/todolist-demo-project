@@ -1,0 +1,208 @@
+/* header */
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 0;
+    max-width: 1200px;
+  
+    .logo-section {
+      display: flex;
+      align-items: center;
+      position: relative;
+  
+      h1 {
+        font-size: 40px;
+        font-weight: 600;
+        margin: 0;
+      }
+  
+      .icon {
+        font-size: 24px;
+        position: relative;
+        top: -6px;
+        margin-left: 6px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+  
+        &:hover {
+          color: var(--action-red);
+        }
+  
+        &:hover + .help-bubble {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+  
+      .help-bubble {
+        position: absolute;
+        top: 30%;
+        left: calc(100% + 12px);
+        transform: translateY(-50%);
+        background-color: var(--background-grey);
+        color: var(--black);
+        padding: 4px 14px;
+        border-radius: 6px;
+        opacity: 0; /* Start hidden */
+        visibility: hidden; /* Hide visually */
+        transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition for appearance */
+        z-index: 10;
+        width: 400px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+  
+        p {
+          font-size: 12px !important; /* Ensures 12px applies */
+          line-height: 1.2;
+          margin: 0;
+        }
+      }
+    }
+  
+    p {
+      font-size: 20px;
+      color: var(--black);
+      margin-top: 8px;
+      line-height: 1.5;
+      max-width: 100%;
+      align-self: stretch;
+    }
+}  
+
+/* task button */
+
+#new-task-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Align text and icon to opposite sides */
+  background-color: var(--background-grey);
+  height: 55px;
+  padding: 10px 20px; /* 10px top/bottom and 20px left/right */
+  border: none;
+  border-radius: 6px; /* Optional for rounded corners */
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.3s ease;
+  width: calc((100% - 100px) / 3); /* Dynamically match backlog column width */
+
+  &:hover {
+    background-color: var(--action-red); /* Slightly lighter on hover */
+  }
+
+  p {
+    font-size: 24px;
+    font-weight: 400; /* Regular font weight */
+    margin: 0;
+    color: var(--black); /* Text color */
+  }
+
+  .icon {
+    font-size: 34px; /* Icon size */
+    color: var(--black); /* Icon color matches the text */
+  }
+}
+
+/* task section */
+
+.task-section {
+  display: flex; /* Flexbox to arrange columns side by side */
+  gap: 50px; /* Space between columns */
+  margin-top: 50px;
+
+  .task-window {
+    flex: 1; /* Make each column take up equal space */
+    height: 700px;
+    background-color: var(--background-grey);
+    padding: 10px 20px; /* 10px top/bottom and 20px left/right */
+    border-radius: 6px; /* Rounded corners */
+
+    .task-header {
+      display: flex;
+      justify-content: space-between; /* Align name and task count */
+      align-items: center;
+
+      h2 {
+        font-size: 24px; /* Match the task count font size */
+        font-weight: 400; /* Regular font weight */
+        margin: 0; /* Remove top margin */
+        padding: 0;
+        color: var(--black);
+      }
+
+      .task-count {
+        font-size: 24px; /* Match header font size */
+        font-weight: 400; /* Regular font weight */
+        margin: 0;
+        color: var(--black);
+      }
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--black); /* Ensure hr is visible */
+      margin: 10px 0;
+      width: 100%;
+    }
+  }
+}
+
+/* task card */
+
+.task-card {
+  background-color: var(--background-white); /* Card background */
+  padding: 10px 20px; /* Top-bottom and left-right padding */
+  border-radius: 6px; /* Optional rounded corners */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  margin-bottom: 20px; /* Space between cards */
+
+  .task-card-header {
+    display: flex;
+    justify-content: space-between; /* Align title and actions */
+    align-items: center;
+
+    h3 {
+      font-size: 20px; /* Title font size */
+      font-weight: 500; /* Regular weight for a clean look */
+      margin: 0;
+      color: var(--black);
+      padding: 0;
+    }
+
+    .task-card-actions {
+      display: flex;
+      gap: 8px; /* Space between icons */
+
+      .icon {
+        font-size: 18px; /* Smaller icon size */
+        opacity: 0.6; /* Slightly less visible */
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+          opacity: 1; /* Full visibility on hover */
+        }
+      }
+    }
+  }
+
+  .task-card-body {
+    display: flex;
+    justify-content: space-between; /* Align description and circle */
+    align-items: center;
+    margin-top: 10px;
+
+    p {
+      font-size: 16px; /* Description font size */
+      margin: 0;
+      color: var(--black);
+      padding-right: 5px;
+    }
+
+    .circle {
+      font-size: 28px; /* Circle size */
+      color: var(--black);
+    }
+  }
+}
