@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/src/styles/index.css">
 </head>
 <body>
+
+    <div id="toast-container"></div>
     
     <main>
 
@@ -47,14 +49,17 @@
                 </div>
                 <form id="task-form">
                     <input 
-                        type="text" 
-                        id="task-title" 
-                        placeholder="type in the task title here..." 
-                        required 
+                    type="text" 
+                    id="task-title" 
+                    placeholder="type in the task title here..." 
+                    maxlength="30" 
+                    required 
                     />
+
                     <textarea 
                         id="task-description" 
                         placeholder="type in the task description here..." 
+                        maxlength="100"
                         required>
                     </textarea>
                     <button type="submit" id="submit-task-button">add task</button>
@@ -75,7 +80,7 @@
 
                 <hr />
 
-                <div class="task-card">
+                <!-- <div class="task-card">
                     <div class="task-card-header">
                       <h3>Implement Drag & Drop</h3>
                       <div class="task-card-actions">
@@ -87,7 +92,7 @@
                       <p>Add functionality to move tasks between columns smoothly.</p>
                       <span class="icon circle">circle</span>
                     </div>
-                </div>                  
+                </div>                   -->
 
             </div>
 
@@ -100,7 +105,7 @@
 
                 <hr />
 
-                <div class="task-card">
+                <!-- <div class="task-card">
                     <div class="task-card-header">
                       <h3>Redesign Homepage</h3>
                       <div class="task-card-actions">
@@ -112,7 +117,7 @@
                       <p>Improve the layout and update the color scheme for a modern look.</p>
                       <span class="icon circle">circle</span>
                     </div>
-                </div>                  
+                </div>                   -->
 
             </div>
 
@@ -125,7 +130,7 @@
 
                 <hr />
 
-                <div class="task-card">
+                <!-- <div class="task-card">
                     <div class="task-card-header">
                       <h3>Fix Navbar Bug</h3>
                       <div class="task-card-actions">
@@ -137,7 +142,7 @@
                       <p>Resolve the issue where the navigation bar overlaps on mobile screens.</p>
                       <span class="icon circle">circle</span>
                     </div>
-                </div>
+                </div> -->
                   
 
             </div>
