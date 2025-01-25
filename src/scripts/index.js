@@ -46,22 +46,6 @@ function showToast(message, type = 'error') {
   requestAnimationFrame(() => toast.classList.add('show'));
 }
 
-// Check character limit and show toast
-taskTitleInput.addEventListener('input', () => {
-  if (taskTitleInput.value.length >= 30) {
-    taskTitleInput.value = taskTitleInput.value.substring(0, 30); // Ensure no more than 30 characters
-    showToast("You've reached the maximum of 30 characters for the title.", 'error');
-  }
-});
-
-// Check character limit and show toast
-taskDescriptionTextarea.addEventListener('input', () => {
-    if (taskDescriptionTextarea.value.length >= 100) {
-      taskDescriptionTextarea.value = taskDescriptionTextarea.value.substring(0, 100); // Ensure no more than 30 characters
-      showToast("You've reached the maximum of 100 characters for the description.", 'error');
-    }
-});
-
 // Add a new task to the backlog
 const taskForm = document.getElementById('task-form');
 taskForm.addEventListener('submit', (e) => {
@@ -80,6 +64,10 @@ taskForm.addEventListener('submit', (e) => {
   // Create a new task card
   const newTaskCard = document.createElement('div');
   newTaskCard.classList.add('task-card');
+  newTaskCard.setAttribute('draggable', 'true'); // Make it draggable
+  const uniqueId = `task-${Date.now()}`; // Create a unique ID based on timestamp
+  newTaskCard.id = uniqueId;
+
   newTaskCard.innerHTML = `
     <div class="task-card-header">
         <h3>${taskTitle}</h3>
@@ -98,8 +86,7 @@ taskForm.addEventListener('submit', (e) => {
   backlogColumn.appendChild(newTaskCard);
 
   // Update the task count
-  const currentCount = parseInt(backlogTaskCount.textContent, 10);
-  backlogTaskCount.textContent = currentCount + 1;
+  updateTaskCounts();
 
   // Show success toast
   showToast('Task added successfully!', 'success');
@@ -107,3 +94,66 @@ taskForm.addEventListener('submit', (e) => {
   // Close the modal
   modal.classList.remove('active');
 });
+
+// Drag-and-drop functionality
+document.addEventListener('dragstart', (e) => {
+  if (e.target.classList.contains('task-card')) {
+    e.dataTransfer.setData('text/plain', e.target.id);
+    e.target.classList.add('dragging');
+  }
+});
+
+document.addEventListener('dragend', (e) => {
+  if (e.target.classList.contains('task-card')) {
+    e.target.classList.remove('dragging');
+  }
+});
+
+// Allow columns to accept dragged tasks
+const columns = document.querySelectorAll('.task-window');
+columns.forEach((column) => {
+  column.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    column.classList.add('drag-over');
+  });
+
+  column.addEventListener('dragleave', () => {
+    column.classList.remove('drag-over');
+  });
+
+  column.addEventListener('drop', (e) => {
+    e.preventDefault();
+    column.classList.remove('drag-over');
+
+    const taskId = e.dataTransfer.getData('text/plain');
+    const taskElement = document.getElementById(taskId);
+
+    if (taskElement) {
+      column.appendChild(taskElement);
+
+      // Update task count for both columns
+      updateTaskCounts();
+    }
+  });
+});
+
+// Update task counts for all columns
+function updateTaskCounts() {
+  document.querySelectorAll('.task-window').forEach((column) => {
+    const taskCount = column.querySelectorAll('.task-card').length;
+    const countElement = column.querySelector('.task-count');
+    countElement.textContent = taskCount;
+  });
+}
+
+// Assign draggable attribute and IDs to static tasks (if needed)
+function initializeStaticTasks() {
+  const tasks = document.querySelectorAll('.task-card');
+  tasks.forEach((task, index) => {
+    task.id = `static-task-${index}`;
+    task.setAttribute('draggable', true);
+  });
+}
+
+// Initialize static tasks on page load
+initializeStaticTasks();

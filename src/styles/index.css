@@ -224,8 +224,8 @@
       &::before {
         content: '';
         position: absolute;
-        width: 19px; /* Slightly smaller than the font size */
-        height: 19px; /* Same as width */
+        width: 20px; /* Slightly smaller than the font size */
+        height: 20px; /* Same as width */
         border-radius: 50%; /* Makes it a perfect circle */
         background-color: transparent; /* Default transparent */
       }
@@ -243,6 +243,19 @@
 
 #window-done .circle::before {
   background-color: var(--task-green);
+}
+
+/* Visual feedback when dragging over a column */
+.task-window.drag-over {
+  border: 2px dashed var(--task-blue);
+  background-color: rgba(52, 152, 219, 0.1); /* Light blue background */
+}
+
+/* Style for the dragging task */
+.task-card.dragging {
+  opacity: 0.6; /* Make it semi-transparent */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 /* Modal styling */
