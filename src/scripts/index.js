@@ -5,6 +5,70 @@ const taskTitleInput = document.getElementById('task-title');
 const taskDescriptionTextarea = document.getElementById('task-description');
 const backlogColumn = document.getElementById('window-backlog');
 const backlogTaskCount = document.querySelector('#header-backlog .task-count');
+const editModal = document.getElementById('edit-task-modal');
+const closeEditButton = document.getElementById('close-edit-modal-button');
+const editTaskForm = document.getElementById('edit-task-form');
+const editTaskTitleInput = document.getElementById('edit-task-title');
+const editTaskDescriptionTextarea = document.getElementById('edit-task-description');
+let currentTask = null; // Store the task being edited
+
+// Open edit modal
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.classList.contains('edit')) {
+    // Find the parent task card
+    currentTask = e.target.closest('.task-card');
+
+    if (currentTask) {
+      // Pre-fill the form with the task details
+      const taskTitle = currentTask.querySelector('.task-card-header h3').textContent;
+      const taskDescription = currentTask.querySelector('.task-card-body p').textContent;
+
+      editTaskTitleInput.value = taskTitle;
+      editTaskDescriptionTextarea.value = taskDescription;
+
+      // Show the edit modal
+      editModal.classList.add('active');
+    }
+  }
+});
+
+// Close edit modal
+closeEditButton.addEventListener('click', () => {
+  editModal.classList.remove('active');
+});
+
+editModal.addEventListener('click', (e) => {
+  if (e.target === editModal) {
+    editModal.classList.remove('active');
+  }
+});
+
+// Save changes to the task
+editTaskForm.addEventListener('submit', (e) => {
+  e.preventDefault(); // Prevent form submission
+
+  // Get updated task details
+  const updatedTitle = editTaskTitleInput.value.trim();
+  const updatedDescription = editTaskDescriptionTextarea.value.trim();
+
+  // Validate inputs
+  if (updatedTitle === '' || updatedDescription === '') {
+    showToast('Both title and description are required!', 'error');
+    return;
+  }
+
+  if (currentTask) {
+    // Update the task card with the new details
+    currentTask.querySelector('.task-card-header h3').textContent = updatedTitle;
+    currentTask.querySelector('.task-card-body p').textContent = updatedDescription;
+
+    // Show success toast
+    showToast('Task updated successfully!', 'success');
+
+    // Close the edit modal
+    editModal.classList.remove('active');
+  }
+});
 
 // Open task modal
 openButton.addEventListener('click', () => {
@@ -72,8 +136,8 @@ taskForm.addEventListener('submit', (e) => {
     <div class="task-card-header">
         <h3>${taskTitle}</h3>
         <div class="task-card-actions">
-            <span class="icon edit">edit</span>
-            <span class="icon delete">delete</span>
+            <span class="icon edit" id="task-edit">edit</span>
+            <span class="icon delete" id="task-delete">delete</span>
         </div>
     </div>
     <div class="task-card-body">
@@ -94,6 +158,25 @@ taskForm.addEventListener('submit', (e) => {
   // Close the modal
   modal.classList.remove('active');
 });
+
+// Add event listener for delete buttons
+document.addEventListener('click', (e) => {
+    if (e.target && e.target.classList.contains('delete')) {
+      // Find the parent task card
+      const taskCard = e.target.closest('.task-card');
+  
+      if (taskCard) {
+        // Remove the task card from its parent column
+        taskCard.remove();
+  
+        // Update task counts
+        updateTaskCounts();
+  
+        // Show success toast
+        showToast('Task deleted successfully!', 'success');
+      }
+    }
+  });
 
 // Drag-and-drop functionality
 document.addEventListener('dragstart', (e) => {

@@ -65,7 +65,35 @@
                     <button type="submit" id="submit-task-button">add task</button>
                 </form>
             </div>
-        </div>                              
+        </div> 
+        
+        <div id="edit-task-modal" class="hidden">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>edit task</h2>
+                <button id="close-edit-modal-button" class="close-button">
+                  <span class="icon">close</span>
+                </button>
+              </div>
+              <form id="edit-task-form">
+                <input 
+                  type="text" 
+                  id="edit-task-title" 
+                  placeholder="edit the task title here..." 
+                  maxlength="30" 
+                  required 
+                />
+                <textarea 
+                  id="edit-task-description" 
+                  placeholder="edit the task description here..." 
+                  maxlength="100"
+                  required>
+                </textarea>
+                <button type="submit" id="submit-edit-task-button">save changes</button>
+              </form>
+            </div>
+          </div>
+          
 
         </div>
 

@@ -117,6 +117,23 @@
     background-color: var(--background-grey);
     padding: 10px 20px; 
     border-radius: 6px; 
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: thin; /* Optional: thinner scrollbar for modern browsers */
+    scrollbar-color: var(--task-blue) var(--background-grey); /* Optional: customize scrollbar colors */
+
+    /* Optional styling for webkit browsers */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--task-blue);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--background-grey);
+    }
 
     .task-header {
       display: flex;
@@ -247,7 +264,6 @@
 
 /* Visual feedback when dragging over a column */
 .task-window.drag-over {
-  border: 2px dashed var(--task-blue);
   background-color: rgba(52, 152, 219, 0.1); /* Light blue background */
 }
 
@@ -362,6 +378,121 @@
       }      
 
       button#submit-task-button {
+        align-self: flex-end; /* Align button to the far right */
+        background-color: var(--background-grey);
+        color: var(--font-black);
+        font-size: 14px; /* Make the button smaller */
+        padding: 8px 16px; /* Adjust padding for smaller button */
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+
+        &:hover {
+          background-color: var(--action-red); /* Change background to action red */
+          color: var(--background-white); /* Change text color to white */
+        }
+      }
+    }
+  }
+}
+
+#edit-task-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  backdrop-filter: blur(8px); /* Blurs the background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden; /* Initially hidden */
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .modal-content {
+    background-color: var(--background-grey);
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between; /* Align title and close button horizontally */
+      align-items: center; /* Align vertically */
+
+      h2 {
+        font-size: 24px;
+        margin: 0;
+        padding: 0;
+        color: var(--font-black);
+      }
+
+      .close-button {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--font-black);
+        cursor: pointer;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: var(--action-red); /* Highlight the close button on hover */
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      input,
+      textarea {
+        width: 100%; /* Full width within the form */
+        box-sizing: border-box; /* Ensure width includes padding and border */
+        padding: 10px;
+        font-size: 16px;
+        font-family: 'Sora', sans-serif; /* Ensure Sora font */
+        line-height: 1.5;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        background-color: var(--background-white);
+        color: var(--font-black);
+        resize: none; /* Disable manual resizing for textarea */
+      }
+
+      textarea {
+        height: 100px; /* Define consistent height */
+        padding: 10px; /* Align text at the top-left */
+        font-size: 16px; /* Match input font size */
+        font-family: 'Sora', sans-serif; /* Apply Sora font */
+        line-height: 1.5; /* Ensure proper spacing for multi-line text */
+        box-sizing: border-box; /* Include padding and border in width/height */
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        background-color: var(--background-white);
+        color: var(--font-black);
+        resize: none; /* Disable manual resizing */
+        overflow-wrap: break-word; /* Ensure long text wraps properly */
+        white-space: pre-wrap; /* Preserve spaces and wrap text */
+      }      
+
+      button#submit-edit-task-button {
         align-self: flex-end; /* Align button to the far right */
         background-color: var(--background-grey);
         color: var(--font-black);
