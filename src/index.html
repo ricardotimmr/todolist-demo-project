@@ -37,6 +37,33 @@
             <span class="icon">add</span>
         </button>
 
+        <div id="task-modal" class="hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>create a new task</h2>
+                    <button id="close-modal-button" class="close-button">
+                        <span class="icon">close</span>
+                    </button>
+                </div>
+                <form id="task-form">
+                    <input 
+                        type="text" 
+                        id="task-title" 
+                        placeholder="type in the task title here..." 
+                        required 
+                    />
+                    <textarea 
+                        id="task-description" 
+                        placeholder="type in the task description here..." 
+                        required>
+                    </textarea>
+                    <button type="submit" id="submit-task-button">add task</button>
+                </form>
+            </div>
+        </div>                              
+
+        </div>
+
         <section class="task-section">
 
             <div class="task-window" id="window-backlog">
@@ -117,7 +144,8 @@
 
         </section>
         
-        
     </main>
+
+    <script src="/src/scripts/index.js"></script>
     
 </html>
