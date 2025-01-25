@@ -4,7 +4,6 @@ const closeButton = document.getElementById('close-modal-button');
 const taskTitleInput = document.getElementById('task-title');
 const taskDescriptionTextarea = document.getElementById('task-description');
 const backlogColumn = document.getElementById('window-backlog');
-const backlogTaskCount = document.querySelector('#header-backlog .task-count');
 const editModal = document.getElementById('edit-task-modal');
 const closeEditButton = document.getElementById('close-edit-modal-button');
 const editTaskForm = document.getElementById('edit-task-form');
@@ -15,18 +14,15 @@ let currentTask = null; // Store the task being edited
 // Open edit modal
 document.addEventListener('click', (e) => {
   if (e.target && e.target.classList.contains('edit')) {
-    // Find the parent task card
     currentTask = e.target.closest('.task-card');
 
     if (currentTask) {
-      // Pre-fill the form with the task details
       const taskTitle = currentTask.querySelector('.task-card-header h3').textContent;
       const taskDescription = currentTask.querySelector('.task-card-body p').textContent;
 
       editTaskTitleInput.value = taskTitle;
       editTaskDescriptionTextarea.value = taskDescription;
 
-      // Show the edit modal
       editModal.classList.add('active');
     }
   }
@@ -45,27 +41,22 @@ editModal.addEventListener('click', (e) => {
 
 // Save changes to the task
 editTaskForm.addEventListener('submit', (e) => {
-  e.preventDefault(); // Prevent form submission
+  e.preventDefault();
 
-  // Get updated task details
   const updatedTitle = editTaskTitleInput.value.trim();
   const updatedDescription = editTaskDescriptionTextarea.value.trim();
 
-  // Validate inputs
   if (updatedTitle === '' || updatedDescription === '') {
     showToast('Both title and description are required!', 'error');
     return;
   }
 
   if (currentTask) {
-    // Update the task card with the new details
     currentTask.querySelector('.task-card-header h3').textContent = updatedTitle;
     currentTask.querySelector('.task-card-body p').textContent = updatedDescription;
 
-    // Show success toast
     showToast('Task updated successfully!', 'success');
-
-    // Close the edit modal
+    saveTasksToLocalStorage();
     editModal.classList.remove('active');
   }
 });
@@ -92,91 +83,83 @@ modal.addEventListener('click', (e) => {
 function showToast(message, type = 'error') {
   const toastContainer = document.getElementById('toast-container');
 
-  // Create the toast element
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
   toast.textContent = message;
 
-  // Add the toast to the container
   toastContainer.appendChild(toast);
 
-  // Automatically remove the toast after 3 seconds
   setTimeout(() => {
     toast.classList.remove('show');
-    setTimeout(() => toast.remove(), 300); // Remove after fade-out
+    setTimeout(() => toast.remove(), 300);
   }, 3000);
 
-  // Show the toast
   requestAnimationFrame(() => toast.classList.add('show'));
 }
 
 // Add a new task to the backlog
 const taskForm = document.getElementById('task-form');
 taskForm.addEventListener('submit', (e) => {
-  e.preventDefault(); // Prevent form submission
+  e.preventDefault();
 
-  // Get task details
   const taskTitle = taskTitleInput.value.trim();
   const taskDescription = taskDescriptionTextarea.value.trim();
 
-  // Validate inputs
   if (taskTitle === '' || taskDescription === '') {
     showToast('Both title and description are required!', 'error');
     return;
   }
 
-  // Create a new task card
+  createTaskElement(taskTitle, taskDescription, 'window-backlog');
+  saveTasksToLocalStorage();
+  showToast('Task added successfully!', 'success');
+  modal.classList.remove('active');
+});
+
+// Function to create a task element
+function createTaskElement(title, description, columnId, id = `task-${Date.now()}`) {
   const newTaskCard = document.createElement('div');
   newTaskCard.classList.add('task-card');
-  newTaskCard.setAttribute('draggable', 'true'); // Make it draggable
-  const uniqueId = `task-${Date.now()}`; // Create a unique ID based on timestamp
-  newTaskCard.id = uniqueId;
+  newTaskCard.setAttribute('draggable', 'true');
+  newTaskCard.id = id;
 
   newTaskCard.innerHTML = `
     <div class="task-card-header">
-        <h3>${taskTitle}</h3>
+        <h3>${title}</h3>
         <div class="task-card-actions">
             <span class="icon edit" id="task-edit">edit</span>
             <span class="icon delete" id="task-delete">delete</span>
         </div>
     </div>
     <div class="task-card-body">
-        <p>${taskDescription}</p>
+        <p>${description}</p>
         <span class="icon circle">circle</span>
     </div>
   `;
 
-  // Add the new task card to the backlog column
-  backlogColumn.appendChild(newTaskCard);
+  const column = document.getElementById(columnId);
+  column.appendChild(newTaskCard);
 
-  // Update the task count
+  initializeTaskEvents(newTaskCard);
   updateTaskCounts();
+}
 
-  // Show success toast
-  showToast('Task added successfully!', 'success');
-
-  // Close the modal
-  modal.classList.remove('active');
-});
-
-// Add event listener for delete buttons
-document.addEventListener('click', (e) => {
-    if (e.target && e.target.classList.contains('delete')) {
-      // Find the parent task card
-      const taskCard = e.target.closest('.task-card');
-  
-      if (taskCard) {
-        // Remove the task card from its parent column
-        taskCard.remove();
-  
-        // Update task counts
-        updateTaskCounts();
-  
-        // Show success toast
-        showToast('Task deleted successfully!', 'success');
-      }
-    }
+// Initialize task events for edit and delete
+function initializeTaskEvents(taskCard) {
+  taskCard.querySelector('.edit').addEventListener('click', () => {
+    currentTask = taskCard;
+    editTaskTitleInput.value = taskCard.querySelector('.task-card-header h3').textContent;
+    editTaskDescriptionTextarea.value = taskCard.querySelector('.task-card-body p').textContent;
+    editModal.classList.add('active');
   });
+
+  taskCard.querySelector('.delete').addEventListener('click', () => {
+    taskCard.remove();
+    updateTaskCounts();
+    saveTasksToLocalStorage();
+    showToast('Task deleted successfully!', 'success');
+  });
+}
 
 // Drag-and-drop functionality
 document.addEventListener('dragstart', (e) => {
@@ -213,9 +196,8 @@ columns.forEach((column) => {
 
     if (taskElement) {
       column.appendChild(taskElement);
-
-      // Update task count for both columns
       updateTaskCounts();
+      saveTasksToLocalStorage();
     }
   });
 });
@@ -229,14 +211,33 @@ function updateTaskCounts() {
   });
 }
 
-// Assign draggable attribute and IDs to static tasks (if needed)
-function initializeStaticTasks() {
-  const tasks = document.querySelectorAll('.task-card');
-  tasks.forEach((task, index) => {
-    task.id = `static-task-${index}`;
-    task.setAttribute('draggable', true);
+// Save tasks to local storage
+function saveTasksToLocalStorage() {
+  const tasks = [];
+  document.querySelectorAll('.task-card').forEach((taskCard) => {
+    const taskTitle = taskCard.querySelector('.task-card-header h3').textContent;
+    const taskDescription = taskCard.querySelector('.task-card-body p').textContent;
+    const parentColumn = taskCard.closest('.task-window').id;
+
+    tasks.push({
+      id: taskCard.id,
+      title: taskTitle,
+      description: taskDescription,
+      column: parentColumn,
+    });
+  });
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// Load tasks from local storage
+function loadTasksFromLocalStorage() {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.forEach((task) => {
+    createTaskElement(task.title, task.description, task.column, task.id);
   });
 }
 
-// Initialize static tasks on page load
-initializeStaticTasks();
+// Initialize static tasks and load saved tasks
+document.addEventListener('DOMContentLoaded', () => {
+  loadTasksFromLocalStorage();
+});
