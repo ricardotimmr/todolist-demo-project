@@ -1,127 +1,123 @@
-/* header */
-
+/* Header */
 .header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 0;
+  max-width: 1200px;
+
+  .logo-section {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 20px 0;
-    max-width: 1200px;
-  
-    .logo-section {
-      display: flex;
-      align-items: center;
+    align-items: center;
+    position: relative;
+
+    h1 {
+      font-size: 40px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .icon {
+      font-size: 24px;
       position: relative;
-  
-      h1 {
-        font-size: 40px;
-        font-weight: 600;
+      top: -6px;
+      margin-left: 6px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--action-red);
+      }
+
+      &:hover + .help-bubble {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .help-bubble {
+      position: absolute;
+      top: 30%;
+      left: calc(100% + 12px);
+      transform: translateY(-50%);
+      background-color: var(--background-grey);
+      color: var(--black);
+      padding: 4px 14px;
+      border-radius: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 10;
+      width: 400px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+
+      p {
+        font-size: 12px !important;
+        line-height: 1.2;
         margin: 0;
       }
-  
-      .icon {
-        font-size: 24px;
-        position: relative;
-        top: -6px;
-        margin-left: 6px;
-        cursor: pointer;
-        transition: color 0.3s ease;
-  
-        &:hover {
-          color: var(--action-red);
-        }
-  
-        &:hover + .help-bubble {
-          opacity: 1;
-          visibility: visible;
-        }
-      }
-  
-      .help-bubble {
-        position: absolute;
-        top: 30%;
-        left: calc(100% + 12px);
-        transform: translateY(-50%);
-        background-color: var(--background-grey);
-        color: var(--black);
-        padding: 4px 14px;
-        border-radius: 6px;
-        opacity: 0; /* Start hidden */
-        visibility: hidden; /* Hide visually */
-        transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition for appearance */
-        z-index: 10;
-        width: 400px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
-  
-        p {
-          font-size: 12px !important; /* Ensures 12px applies */
-          line-height: 1.2;
-          margin: 0;
-        }
-      }
     }
-  
-    p {
-      font-size: 20px;
-      color: var(--black);
-      margin-top: 8px;
-      line-height: 1.5;
-      max-width: 100%;
-      align-self: stretch;
-    }
-}  
+  }
 
-/* task button */
+  p {
+    font-size: 20px;
+    color: var(--black);
+    margin-top: 8px;
+    line-height: 1.5;
+    max-width: 100%;
+    align-self: stretch;
+  }
+}
 
+/* Task Button */
 #new-task-button {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Align text and icon to opposite sides */
+  justify-content: space-between;
   background-color: var(--background-grey);
   height: 55px;
-  padding: 10px 20px; /* 10px top/bottom and 20px left/right */
+  padding: 10px 20px;
   border: none;
-  border-radius: 6px; /* Optional for rounded corners */
+  border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
   transition: background-color 0.3s ease;
-  width: calc((100% - 100px) / 3); /* Dynamically match backlog column width */
+  width: calc((100% - 100px) / 3);
 
   &:hover {
-    background-color: var(--action-red); /* Slightly lighter on hover */
+    background-color: var(--action-red);
   }
 
   p {
     font-size: 24px;
-    font-weight: 400; /* Regular font weight */
+    font-weight: 400;
     margin: 0;
-    color: var(--black); /* Text color */
+    color: var(--black);
   }
 
   .icon {
-    font-size: 34px; 
-    color: var(--black); 
+    font-size: 34px;
+    color: var(--black);
   }
 }
 
-/* task section */
-
+/* Task Section */
 .task-section {
-  display: flex; 
-  gap: 50px; 
+  display: flex;
+  gap: 50px;
   margin-top: 50px;
 
   .task-window {
-    flex: 1; 
+    flex: 1;
     height: 700px;
     background-color: var(--background-grey);
-    padding: 10px 20px; 
-    border-radius: 6px; 
-    overflow-y: auto; /* Enable vertical scrolling */
-    scrollbar-width: thin; /* Optional: thinner scrollbar for modern browsers */
-    scrollbar-color: var(--task-blue) var(--background-grey); /* Optional: customize scrollbar colors */
+    padding: 10px 20px;
+    border-radius: 6px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--task-blue) var(--background-grey);
 
-    /* Optional styling for webkit browsers */
     &::-webkit-scrollbar {
       width: 8px;
     }
@@ -137,20 +133,20 @@
 
     .task-header {
       display: flex;
-      justify-content: space-between; 
+      justify-content: space-between;
       align-items: center;
 
       h2 {
-        font-size: 24px; 
-        font-weight: 400; 
-        margin: 0; 
+        font-size: 24px;
+        font-weight: 400;
+        margin: 0;
         padding: 0;
         color: var(--black);
       }
 
       .task-count {
-        font-size: 24px; 
-        font-weight: 400; 
+        font-size: 24px;
+        font-weight: 400;
         margin: 0;
         color: var(--black);
       }
@@ -158,33 +154,32 @@
 
     hr {
       border: none;
-      border-top: 1px solid var(--black); 
+      border-top: 1px solid var(--black);
       margin: 10px 0;
       width: 100%;
     }
   }
 }
 
-/* task card */
-
+/* Task Card */
 .task-card {
   background-color: var(--background-white);
   padding: 10px 20px;
   border-radius: 6px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   cursor: grab;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: scale(1.02);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
   &:active {
     cursor: grabbing;
     transform: scale(1);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .task-card-header {
@@ -231,31 +226,31 @@
     }
 
     .circle {
-      font-size: 28px; /* Matches the size of the icon */
-      position: relative; /* To position background inside */
+      font-size: 28px;
+      position: relative;
       display: inline-flex;
       justify-content: center;
       align-items: center;
 
-      /* Add a background to simulate filling the icon */
       &::before {
         content: '';
         position: absolute;
-        width: 20px; /* Slightly smaller than the font size */
-        height: 20px; /* Same as width */
-        border-radius: 50%; /* Makes it a perfect circle */
-        background-color: transparent; /* Default transparent */
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: transparent;
       }
     }
   }
 }
 
+/* Circle indicators for task columns */
 #window-backlog .circle::before {
-  background-color: var(--action-red); 
+  background-color: var(--action-red);
 }
 
 #window-ongoing .circle::before {
-  background-color: var(--task-yellow); 
+  background-color: var(--task-yellow);
 }
 
 #window-done .circle::before {
@@ -269,148 +264,26 @@
 
 /* Style for the dragging task */
 .task-card.dragging {
-  opacity: 0.6; /* Make it semi-transparent */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0.6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
 }
 
-/* Modal styling */
-
-#task-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  backdrop-filter: blur(8px); /* Blurs the background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  visibility: hidden; /* Initially hidden */
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-
-  &.active {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .modal-content {
-    background-color: var(--background-grey);
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between; /* Align title and close button horizontally */
-      align-items: center; /* Align vertically */
-
-      h2 {
-        font-size: 24px;
-        margin: 0;
-        padding: 0;
-        color: var(--font-black);
-      }
-
-      .close-button {
-        background: none;
-        border: none;
-        font-size: 24px;
-        color: var(--font-black);
-        cursor: pointer;
-        transition: color 0.2s ease;
-
-        &:hover {
-          color: var(--action-red); /* Highlight the close button on hover */
-        }
-      }
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-
-      input,
-      textarea {
-        width: 100%; /* Full width within the form */
-        box-sizing: border-box; /* Ensure width includes padding and border */
-        padding: 10px;
-        font-size: 16px;
-        font-family: 'Sora', sans-serif; /* Ensure Sora font */
-        line-height: 1.5;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 6px;
-        background-color: var(--background-white);
-        color: var(--font-black);
-        resize: none; /* Disable manual resizing for textarea */
-      }
-
-      textarea {
-        height: 100px; /* Define consistent height */
-        padding: 10px; /* Align text at the top-left */
-        font-size: 16px; /* Match input font size */
-        font-family: 'Sora', sans-serif; /* Apply Sora font */
-        line-height: 1.5; /* Ensure proper spacing for multi-line text */
-        box-sizing: border-box; /* Include padding and border in width/height */
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 6px;
-        background-color: var(--background-white);
-        color: var(--font-black);
-        resize: none; /* Disable manual resizing */
-        overflow-wrap: break-word; /* Ensure long text wraps properly */
-        white-space: pre-wrap; /* Preserve spaces and wrap text */
-      }      
-
-      #title-char-count {
-        font-size: 12px;
-        color: var(--font-black);
-        margin-top: 4px;
-        text-align: right;
-      }      
-
-      button#submit-task-button {
-        align-self: flex-end; /* Align button to the far right */
-        background-color: var(--background-grey);
-        color: var(--font-black);
-        font-size: 14px; /* Make the button smaller */
-        padding: 8px 16px; /* Adjust padding for smaller button */
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, color 0.3s ease;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-
-        &:hover {
-          background-color: var(--action-red); /* Change background to action red */
-          color: var(--background-white); /* Change text color to white */
-        }
-      }
-    }
-  }
-}
-
+/* Modal Styling */
+#task-modal,
 #edit-task-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  backdrop-filter: blur(8px); /* Blurs the background */
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  visibility: hidden; /* Initially hidden */
+  visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
@@ -424,7 +297,7 @@
     padding: 20px;
     border-radius: 8px;
     width: 400px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -432,8 +305,8 @@
 
     .modal-header {
       display: flex;
-      justify-content: space-between; /* Align title and close button horizontally */
-      align-items: center; /* Align vertically */
+      justify-content: space-between;
+      align-items: center;
 
       h2 {
         font-size: 24px;
@@ -451,7 +324,7 @@
         transition: color 0.2s ease;
 
         &:hover {
-          color: var(--action-red); /* Highlight the close button on hover */
+          color: var(--action-red);
         }
       }
     }
@@ -463,57 +336,47 @@
 
       input,
       textarea {
-        width: 100%; /* Full width within the form */
-        box-sizing: border-box; /* Ensure width includes padding and border */
+        width: 100%;
+        box-sizing: border-box;
         padding: 10px;
         font-size: 16px;
-        font-family: 'Sora', sans-serif; /* Ensure Sora font */
+        font-family: 'Sora', sans-serif;
         line-height: 1.5;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         background-color: var(--background-white);
         color: var(--font-black);
-        resize: none; /* Disable manual resizing for textarea */
+        resize: none;
       }
 
       textarea {
-        height: 100px; /* Define consistent height */
-        padding: 10px; /* Align text at the top-left */
-        font-size: 16px; /* Match input font size */
-        font-family: 'Sora', sans-serif; /* Apply Sora font */
-        line-height: 1.5; /* Ensure proper spacing for multi-line text */
-        box-sizing: border-box; /* Include padding and border in width/height */
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 6px;
-        background-color: var(--background-white);
-        color: var(--font-black);
-        resize: none; /* Disable manual resizing */
-        overflow-wrap: break-word; /* Ensure long text wraps properly */
-        white-space: pre-wrap; /* Preserve spaces and wrap text */
-      }      
+        height: 100px;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+      }
 
-      button#submit-edit-task-button {
-        align-self: flex-end; /* Align button to the far right */
+      button[type="submit"] {
+        align-self: flex-end;
         background-color: var(--background-grey);
         color: var(--font-black);
-        font-size: 14px; /* Make the button smaller */
-        padding: 8px 16px; /* Adjust padding for smaller button */
+        font-size: 14px;
+        padding: 8px 16px;
         border: none;
         border-radius: 6px;
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 
         &:hover {
-          background-color: var(--action-red); /* Change background to action red */
-          color: var(--background-white); /* Change text color to white */
+          background-color: var(--action-red);
+          color: var(--background-white);
         }
       }
     }
   }
 }
 
-/* toast container for alerts */
+/* Toast Container for Alerts */
 #toast-container {
   position: fixed;
   top: 20px;
@@ -535,18 +398,19 @@
   animation: fade-in 0.5s, fade-out 0.5s 3s;
   opacity: 0;
   transform: translateY(-20px);
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  &.success {
+    background-color: var(--task-blue);
+  }
 }
 
-.toast.show {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.toast.success {
-  background-color: var(--task-blue); /* Or another color */
-}
-
+/* Keyframes for Toast Animations */
 @keyframes fade-in {
   from {
     opacity: 0;

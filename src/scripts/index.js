@@ -9,11 +9,12 @@ const closeEditButton = document.getElementById('close-edit-modal-button');
 const editTaskForm = document.getElementById('edit-task-form');
 const editTaskTitleInput = document.getElementById('edit-task-title');
 const editTaskDescriptionTextarea = document.getElementById('edit-task-description');
-let currentTask = null; // Store the task being edited
+
+let currentTask = null;
 
 // Open edit modal
 document.addEventListener('click', (e) => {
-  if (e.target && e.target.classList.contains('edit')) {
+  if (e.target?.classList.contains('edit')) {
     currentTask = e.target.closest('.task-card');
 
     if (currentTask) {
@@ -46,7 +47,7 @@ editTaskForm.addEventListener('submit', (e) => {
   const updatedTitle = editTaskTitleInput.value.trim();
   const updatedDescription = editTaskDescriptionTextarea.value.trim();
 
-  if (updatedTitle === '' || updatedDescription === '') {
+  if (!updatedTitle || !updatedDescription) {
     showToast('Both title and description are required!', 'error');
     return;
   }
@@ -82,7 +83,6 @@ modal.addEventListener('click', (e) => {
 // Add a toast notification
 function showToast(message, type = 'error') {
   const toastContainer = document.getElementById('toast-container');
-
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
   toast.textContent = message;
@@ -105,7 +105,7 @@ taskForm.addEventListener('submit', (e) => {
   const taskTitle = taskTitleInput.value.trim();
   const taskDescription = taskDescriptionTextarea.value.trim();
 
-  if (taskTitle === '' || taskDescription === '') {
+  if (!taskTitle || !taskDescription) {
     showToast('Both title and description are required!', 'error');
     return;
   }
@@ -125,15 +125,15 @@ function createTaskElement(title, description, columnId, id = `task-${Date.now()
 
   newTaskCard.innerHTML = `
     <div class="task-card-header">
-        <h3>${title}</h3>
-        <div class="task-card-actions">
-            <span class="icon edit" id="task-edit">edit</span>
-            <span class="icon delete" id="task-delete">delete</span>
-        </div>
+      <h3>${title}</h3>
+      <div class="task-card-actions">
+        <span class="icon edit">edit</span>
+        <span class="icon delete">delete</span>
+      </div>
     </div>
     <div class="task-card-body">
-        <p>${description}</p>
-        <span class="icon circle">circle</span>
+      <p>${description}</p>
+      <span class="icon circle">circle</span>
     </div>
   `;
 

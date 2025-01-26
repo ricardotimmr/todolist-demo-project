@@ -8,11 +8,9 @@
     <link rel="stylesheet" href="/src/styles/index.css">
 </head>
 <body>
-
     <div id="toast-container"></div>
     
     <main>
-
         <section class="header">
             <div class="logo-section">
                 <h1>taskly.</h1>
@@ -23,7 +21,6 @@
                         Create a task and drag it through different stages – from Backlog to Ongoing to Done. 
                         Stay organized with a clear visual workflow and track your progress effortlessly.
                     </p>
-
                 </div>
             </div>
             <p>
@@ -48,20 +45,8 @@
                     </button>
                 </div>
                 <form id="task-form">
-                    <input 
-                    type="text" 
-                    id="task-title" 
-                    placeholder="type in the task title here..." 
-                    maxlength="30" 
-                    required 
-                    />
-
-                    <textarea 
-                        id="task-description" 
-                        placeholder="type in the task description here..." 
-                        maxlength="100"
-                        required>
-                    </textarea>
+                    <input type="text" id="task-title" placeholder="type in the task title here..." maxlength="30" required />
+                    <textarea id="task-description" placeholder="type in the task description here..." maxlength="100" required></textarea>
                     <button type="submit" id="submit-task-button">add task</button>
                 </form>
             </div>
@@ -69,116 +54,47 @@
         
         <div id="edit-task-modal" class="hidden">
             <div class="modal-content">
-              <div class="modal-header">
-                <h2>edit task</h2>
-                <button id="close-edit-modal-button" class="close-button">
-                  <span class="icon">close</span>
-                </button>
-              </div>
-              <form id="edit-task-form">
-                <input 
-                  type="text" 
-                  id="edit-task-title" 
-                  placeholder="edit the task title here..." 
-                  maxlength="30" 
-                  required 
-                />
-                <textarea 
-                  id="edit-task-description" 
-                  placeholder="edit the task description here..." 
-                  maxlength="100"
-                  required>
-                </textarea>
-                <button type="submit" id="submit-edit-task-button">save changes</button>
-              </form>
+                <div class="modal-header">
+                    <h2>edit task</h2>
+                    <button id="close-edit-modal-button" class="close-button">
+                        <span class="icon">close</span>
+                    </button>
+                </div>
+                <form id="edit-task-form">
+                    <input type="text" id="edit-task-title" placeholder="edit the task title here..." maxlength="30" required />
+                    <textarea id="edit-task-description" placeholder="edit the task description here..." maxlength="100" required></textarea>
+                    <button type="submit" id="submit-edit-task-button">save changes</button>
+                </form>
             </div>
-          </div>
-          
-
         </div>
 
         <section class="task-section">
-
             <div class="task-window" id="window-backlog">
-
                 <div class="task-header" id="header-backlog">
                     <h2>backlog</h2>
                     <p class="task-count">0</p>
                 </div>
-
                 <hr />
-
-                <!-- <div class="task-card">
-                    <div class="task-card-header">
-                      <h3>Implement Drag & Drop</h3>
-                      <div class="task-card-actions">
-                        <span class="icon edit">edit</span>
-                        <span class="icon delete">delete</span>
-                      </div>
-                    </div>
-                    <div class="task-card-body">
-                      <p>Add functionality to move tasks between columns smoothly.</p>
-                      <span class="icon circle">circle</span>
-                    </div>
-                </div>                   -->
-
             </div>
 
             <div class="task-window" id="window-ongoing">
-
                 <div class="task-header" id="header-ongoing">
                     <h2>ongoing</h2>
                     <p class="task-count">0</p>
                 </div>
-
                 <hr />
-
-                <!-- <div class="task-card">
-                    <div class="task-card-header">
-                      <h3>Redesign Homepage</h3>
-                      <div class="task-card-actions">
-                        <span class="icon edit">edit</span>
-                        <span class="icon delete">delete</span>
-                      </div>
-                    </div>
-                    <div class="task-card-body">
-                      <p>Improve the layout and update the color scheme for a modern look.</p>
-                      <span class="icon circle">circle</span>
-                    </div>
-                </div>                   -->
-
             </div>
 
             <div class="task-window" id="window-done">
-
                 <div class="task-header" id="header-done">
                     <h2>done</h2>
                     <p class="task-count">0</p>
                 </div>
-
                 <hr />
-
-                <!-- <div class="task-card">
-                    <div class="task-card-header">
-                      <h3>Fix Navbar Bug</h3>
-                      <div class="task-card-actions">
-                        <span class="icon edit">edit</span>
-                        <span class="icon delete">delete</span>
-                      </div>
-                    </div>
-                    <div class="task-card-body">
-                      <p>Resolve the issue where the navigation bar overlaps on mobile screens.</p>
-                      <span class="icon circle">circle</span>
-                    </div>
-                </div> -->
-                  
-
             </div>
-
         </section>
-        
     </main>
 
     <script src="/src/scripts/index.js"></script>
-    
+</body>
 </html>
